@@ -28,16 +28,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("onInit");
     this._pay_subscription = this.payService.idChangeAnnounce$.subscribe((v) => {
       this.payId = v;
-      console.log(v);
+      this.getData()
     });
-    this.getData()
   }
 
   validate(pass) {
-
     console.log(pass)
   }
 

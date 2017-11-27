@@ -4,7 +4,6 @@ import {PayServiceService} from "../pay-service.service";
 
 @Component({
   selector: 'app-pay-route-hanlde',
-  providers: [PayServiceService],
   templateUrl: './pay-route-hanlde.component.html',
   styleUrls: ['./pay-route-hanlde.component.css']
 })
@@ -16,7 +15,7 @@ export class PayRouteHanldeComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       let payId = params['payId'];
       console.log(payId);
-      this.payService.change(payId)
+      this.payService.change(payId);
     });
   }
 

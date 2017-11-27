@@ -11,7 +11,6 @@ export class PayServiceService {
   constructor() { this.id = 0 }
 
   change(payId: any) {
-    console.log("change" + payId);
     this.idChange.next(payId)
   }
 
