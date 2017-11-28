@@ -6,11 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { PayRouteHanldeComponent } from './pay-route-hanlde/pay-route-hanlde.component';
+import { SuccessPaymentComponent } from './success-payment/success-payment.component';
+import { FailedPaymentComponent } from './failed-payment/failed-payment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PayRouteHanldeComponent
+    PayRouteHanldeComponent,
+    SuccessPaymentComponent,
+    FailedPaymentComponent
   ],
   imports: [
     BrowserModule,

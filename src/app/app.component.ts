@@ -17,14 +17,16 @@ import 'rxjs/add/operator/timeout'
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  apiURL = 'http://localhost:8080/';
+  apiURL = 'http://localhost:8080/payment/';
 
   initData: any = {};
   payId: number;
+  showForm = true;
+  isValid = false;
 
   private _pay_subscription: Subscription;
 
-  constructor(private http: Http, private payService: PayServiceService) {
+  constructor(private http: Http, private payService: PayServiceService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -35,8 +37,24 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   validate(pass) {
-    console.log(pass)
+    console.log("Entered code: " + pass);
+    this.http.get(this.apiURL + "check/" + pass).map((res: Response) => res.json()).subscribe(data => {
+      this.isValid = data;
+      if (this.isValid) {
+        this.router.navigate(['success']);
+        this.showForm = false
+      } else {
+        this.router.navigate(['fail']);
+        this.showForm = false
+      }
+    });
   }
+
+  regenerateCode() {
+    this.http.get(this.apiURL + "generate/").map((res: Response) => res.json()).subscribe(data => {
+      console.log("Generated Value: " + data)
+    })
+  };
 
   getData() {
     return this.http.get(this.apiURL + this.payId).map((res: Response) => res.json()).subscribe(data => {

