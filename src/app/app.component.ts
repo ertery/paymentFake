@@ -17,7 +17,7 @@ import 'rxjs/add/operator/timeout'
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  apiURL = 'http://localhost:8080/payment/';
+  apiURL = 'http://ec2-34-214-115-29.us-west-2.compute.amazonaws.com:8080/payment/';
 
   initData: any = {};
   payId: number;
