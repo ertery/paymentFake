@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   validate(pass) {
     console.log("Entered code: " + pass);
-    this.http.get(this.apiURL + "check/" + pass).map((res: Response) => res.json()).subscribe(data => {
+    this.http.get(this.apiURL + "check?code=" + pass + "&paymentId=" + this.payId + "&personId=" + this.initData.personId).map((res: Response) => res.json()).subscribe(data => {
       this.isValid = data;
       if (this.isValid) {
         this.router.navigate(['success']);
